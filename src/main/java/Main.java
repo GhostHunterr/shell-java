@@ -3,21 +3,37 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws Exception {
 
-        while (true) {
+        boolean exitShell = false;
+
+        while (!exitShell) {
             System.out.print("$ ");
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine();
-            input = input.trim();
+            input.trim();
 
-            if (input.startsWith("exit")) {
-                String code = input.split("\\s+")[1];
-                switch (code) {
-                    case "1":
-                        break;
-                }
-                break;
+
+            boolean validInput = false;
+            String command = input.split("\\s+")[0];
+
+            switch (command) {
+                case "echo":
+                    System.out.println(input.substring(input.indexOf(" ") + 1));
+                    validInput = true;
+                    break;
+                case "exit":
+                    String[] slicedInput = input.split("\\s+");
+                    switch (slicedInput.length > 1 ? slicedInput[1] : "") {
+                        case "0":
+                            validInput = true;
+                            exitShell = true;
+                            break;
+                    }
+                    break;
             }
-            System.out.println(input + ": command not found");
+
+            if (!validInput) {
+                System.out.println(input + ": command not found");
+            }
         }
     }
 }
