@@ -14,8 +14,6 @@ public class Main {
                 switch (code) {
                     case "1":
                         break;
-                    default:
-                        System.out.println("Invalid Status Code!");
                 }
                 break;
             }
